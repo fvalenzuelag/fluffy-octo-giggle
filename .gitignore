@@ -1,0 +1,49 @@
+# Variables de entorno (contienen secretos)
+.env
+.env.local
+.env.*.local
+
+# Dependencias
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Build y artefactos
+dist/
+build/
+out/
+*.egg-info/
+.eggs/
+
+# Logs y caché
+logs/
+*.log
+.cache/
+.npm/
+.yarn/
+
+# IDE y sistema
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Testing y cobertura
+coverage/
+.nyc_output/
+.pytest_cache/
+.htmlcov/
+
+# Docker (opcional)
+.docker/
+
+# Secretos y certificados (nunca versionar)
+*.pem
+*.key
+secrets/
