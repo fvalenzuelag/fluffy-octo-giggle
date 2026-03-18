@@ -56,6 +56,87 @@ Si no usas `.gitignore`, puedes subir por error secretos o miles de archivos inn
 
 ---
 
+## Git y GitHub desde consola
+
+Pasos para **importar**, **administrar** y **controlar** un repositorio desde la terminal. Todo se hace con Git en tu máquina; GitHub es el sitio donde se guarda una copia remota.
+
+### Antes de empezar
+
+- **Git** instalado: `git --version`
+- **Cuenta en GitHub** y autenticación configurada:
+  - **HTTPS:** al hacer `push`/`pull` te pedirá usuario y contraseña (usa un *Personal Access Token* en lugar de la contraseña de la cuenta).
+  - **SSH:** genera una clave y añádela en GitHub → Settings → SSH and GPG keys. Luego usa URLs como `git@github.com:usuario/repo.git`.
+
+### 1. Importar un repositorio
+
+#### Opción A — Clonar un repo que ya está en GitHub
+
+```bash
+git clone https://github.com/usuario/nombre-repo.git
+cd nombre-repo
+```
+
+Con SSH:
+
+```bash
+git clone git@github.com:usuario/nombre-repo.git
+cd nombre-repo
+```
+
+#### Opción B — Subir un proyecto local nuevo a GitHub
+
+1. Crea el repositorio en GitHub (web: New repository, sin inicializar con README si ya tienes código local).
+2. En la carpeta de tu proyecto:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/usuario/nombre-repo.git
+git push -u origin main
+```
+
+Sustituye `usuario/nombre-repo` por tu usuario y nombre del repo. Si usas SSH, cambia la URL por `git@github.com:usuario/nombre-repo.git`.
+
+### 2. Administrar el repositorio (remotes y ramas)
+
+| Acción | Comando |
+| ------ | ------- |
+| Ver remotes | `git remote -v` |
+| Añadir otro remoto | `git remote add otroNombre https://github.com/...` |
+| Cambiar URL del origin | `git remote set-url origin NUEVA_URL` |
+| Ver ramas | `git branch -a` |
+| Crear y cambiar a una rama | `git switch -c nombre-rama` |
+| Cambiar de rama | `git switch main` |
+| Eliminar rama local | `git branch -d nombre-rama` |
+| Traer ramas remotas actualizadas | `git fetch origin` |
+
+### 3. Control del flujo de trabajo (diario)
+
+| Acción | Comando |
+| ------ | ------- |
+| Ver estado (archivos modificados, staged, etc.) | `git status` |
+| Añadir archivos al área de preparación | `git add .` o `git add archivo.txt` |
+| Hacer commit | `git commit -m "Descripción del cambio"` |
+| Enviar commits al remoto | `git push origin main` (o la rama en la que estés) |
+| Traer y fusionar cambios del remoto | `git pull origin main` |
+| Ver historial de commits | `git log --oneline` |
+| Ver diferencias antes de commit | `git diff` |
+
+**Flujo típico:** `git status` → `git add .` → `git commit -m "mensaje"` → `git push`.
+
+### 4. Resolver situaciones habituales
+
+- **Te pide usuario/contraseña:** con HTTPS, usa un *Personal Access Token* (GitHub → Settings → Developer settings → Personal access tokens) como contraseña.
+- **"Updates were rejected" (push rechazado):** alguien subió cambios antes. Haz `git pull origin main` (o tu rama), resuelve conflictos si los hay, y luego `git push`.
+- **Quieres deshacer el último commit (manteniendo cambios):** `git reset --soft HEAD~1`.
+- **Archivo ya en .gitignore pero sigue en Git:** `git rm --cached nombre-archivo` y luego commit.
+
+Con estos pasos puedes **importar** (clonar o subir), **administrar** (remotes, ramas) y **controlar** (add, commit, push, pull) un repositorio desde consola en GitHub.
+
+---
+
 ## Partes de un pipeline CI/CD
 
 Casi todos los pipelines siguen estas fases:
@@ -160,5 +241,6 @@ pipeline {
 - Las **herramientas** (GitHub Actions, Azure DevOps, Jenkins) hacen lo mismo con distinta sintaxis y entorno.
 - En cualquier proyecto, buscar: **dónde está el código**, **dónde está el pipeline** y **a dónde se despliega**.
 - Usar **.env.example** como plantilla y **nunca** subir `.env`; revisar **.gitignore** para no versionar secretos ni archivos generados.
+- Para **importar, administrar y controlar** el repo desde consola: ver la sección **Git y GitHub desde consola** (clonar, subir proyecto nuevo, remotes, ramas, add/commit/push/pull).
 
 Los ejemplos completos están en la carpeta **Ejemplos CICD**. La plantilla de variables de entorno está en **.env.example** y la lista de exclusiones de Git en **.gitignore**.
