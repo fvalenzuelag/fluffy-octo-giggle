@@ -137,6 +137,39 @@ Con estos pasos puedes **importar** (clonar o subir), **administrar** (remotes, 
 
 ---
 
+## Demo: aplicación web en Docker (`sampler-app`)
+
+En la carpeta **`sampler-app`** hay una **interfaz web** de ejemplo (HTML/CSS/JS) servida por **Node + Express**, con un endpoint **`GET /api/health`** para comprobar que el contenedor responde. Sirve para enseñar **build de imagen**, **mapeo de puertos** y el flujo **Build → Test → Deploy** en pantalla.
+
+### Cómo ejecutarla (Docker)
+
+```bash
+cd sampler-app
+docker build -t sampler-demo .
+docker run --rm -p 3000:3000 sampler-demo
+```
+
+Abre el navegador en `http://localhost:3000`.
+
+Con **Docker Compose**:
+
+```bash
+cd sampler-app
+docker compose up --build
+```
+
+### Sin Docker (solo Node)
+
+```bash
+cd sampler-app
+npm install
+npm start
+```
+
+Detalles y tabla de archivos (`Dockerfile`, `server.js`, `public/`) en **`sampler-app/README.md`**.
+
+---
+
 ## Partes de un pipeline CI/CD
 
 Casi todos los pipelines siguen estas fases:
@@ -242,5 +275,6 @@ pipeline {
 - En cualquier proyecto, buscar: **dónde está el código**, **dónde está el pipeline** y **a dónde se despliega**.
 - Usar **.env.example** como plantilla y **nunca** subir `.env`; revisar **.gitignore** para no versionar secretos ni archivos generados.
 - Para **importar, administrar y controlar** el repo desde consola: ver la sección **Git y GitHub desde consola** (clonar, subir proyecto nuevo, remotes, ramas, add/commit/push/pull).
+- La carpeta **`sampler-app`** contiene una **demo web en Docker** (interfaz + API) para mostrar en clase cómo se construye y ejecuta un contenedor.
 
 Los ejemplos completos están en la carpeta **Ejemplos CICD**. La plantilla de variables de entorno está en **.env.example** y la lista de exclusiones de Git en **.gitignore**.

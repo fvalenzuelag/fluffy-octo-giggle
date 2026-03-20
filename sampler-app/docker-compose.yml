@@ -1,0 +1,11 @@
+# Uso: docker compose up --build
+# Web: http://localhost:3000
+
+services:
+  sampler:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000

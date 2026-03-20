@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo DevOps — Sampler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">◆</span>
+        <span>Sampler DevOps</span>
+      </div>
+      <span class="badge">Docker ready</span>
+    </header>
+
+    <main class="main">
+      <section class="hero">
+        <p class="eyebrow">Aplicación de demostración</p>
+        <h1>Interfaz lista para contenedores</h1>
+        <p class="lead">
+          Esta página se sirve desde Node + Express. Úsala para mostrar a tus alumnos cómo se
+          empaqueta una app en una imagen Docker y se expone en un puerto.
+        </p>
+      </section>
+
+      <section class="pipeline" aria-label="Flujo CI/CD ilustrativo">
+        <h2 class="section-title">Flujo típico</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">1</span>
+            <span class="step-label">Build</span>
+          </li>
+          <li class="step-arrow" aria-hidden="true">→</li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <span class="step-label">Test</span>
+          </li>
+          <li class="step-arrow" aria-hidden="true">→</li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <span class="step-label">Deploy</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Estado del servicio</h2>
+          <button type="button" class="btn" id="refreshBtn">Actualizar</button>
+        </div>
+        <p class="hint">Datos desde <code>GET /api/health</code> (útil para probar el contenedor).</p>
+        <pre class="json-out" id="healthJson" role="status" aria-live="polite">Cargando…</pre>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Abre <code>http://localhost:3000</code> tras <code>docker run</code> o <code>docker compose up</code>.</p>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
